@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" lang="de" content="Zeitleiste, Zeitlinie, Zeitkarte, Geschichte, Chronologie">
+    <meta name="keywords" lang="en" content="Timeline, Timemap, History, Chronology">
+    <title>Email visualization</title>
+
+    <script src="d3js/d3.v3.min.js"></script>
+	<script src="jquery/jquery.js"></script>
+    <script src="timeline.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+	
+	<link href="timeline.css" rel="stylesheet" type="text/css" />
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="layout.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row-fluid top-buffer">
+			<div class="col-md-1"></div>
+			<div id="chart-area" class="col-md-10">
+				<ul class="nav nav-pills nav-justified">
+					<li class="active">
+						<a href="#tab1" data-toggle="tab">Thread Timeline</a>
+					</li>
+					<li>
+						<a href="#tab2" data-toggle="tab">Thread Length</a>
+					</li>
+					<li>
+						<a href="#tab3" data-toggle="tab">Contact List</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+						<div class="tab-pane active" id="tab1">
+							<div id="timeline" width="100%" height="100%"></div>
+						</div>
+						<div class="tab-pane" id="tab2">
+							Thread Count Chart
+						</div>
+						<div class="tab-pane" id="tab3">
+							Contact List Chart
+						</div>
+					</div>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	</div>
+
+	<script>
+		var domElement = "#timeline";
+		//var sourceFile = "philosophers.csv";
+		var sourceFile = "timeline.csv";
+
+		// Read in the data and construct the timeline
+		d3.csv(sourceFile, function(dataset) {
+
+			timeline(domElement)
+				.data(dataset)
+				.band("mainBand", 0.82)
+				.band("naviBand", 0.08)
+				.xAxis("mainBand")
+				.tooltips("mainBand")
+				.xAxis("naviBand")
+				.labels("mainBand")
+				.labels("naviBand")
+				.brush("naviBand", ["mainBand"])
+				.redraw();
+
+		});
+		$(window).load(function(){
+			$('#tab a[href="#tab1"]').tab('show');
+		});
+	</script>
+</body>
+
+</html>

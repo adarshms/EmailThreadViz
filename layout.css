@@ -1,0 +1,14 @@
+.top-buffer { 
+	margin-top:25px; 
+}
+.nav-pills .active a,
+.nav-pills .active a:hover{
+font-size:28px;
+	color:#424242;
+	font-family: "Calibri";
+}
+.nav-pills a {
+	font-size:24px;
+	color:#A4A4A4;
+	font-family: "Calibri";
+}
