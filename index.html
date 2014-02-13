@@ -2,17 +2,18 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" lang="de" content="Zeitleiste, Zeitlinie, Zeitkarte, Geschichte, Chronologie">
-    <meta name="keywords" lang="en" content="Timeline, Timemap, History, Chronology">
     <title>Email visualization</title>
 
     <script src="d3js/d3.v3.min.js"></script>
 	<script src="jquery/jquery.js"></script>
     <script src="timeline.js"></script>
 	<script src="threadlength.js"></script>
+	<script src="contactslist.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 	
 	<link href="timeline.css" rel="stylesheet" type="text/css" />
+	<link href="threadlength.css" rel="stylesheet" type="text/css" />
+	<link href="contactslist.css" rel="stylesheet" type="text/css" />
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="layout.css" rel="stylesheet" type="text/css" />
 </head>
@@ -43,7 +44,10 @@
 						</div>
 					</div>
 					<div class="tab-pane" id="tab3">
-						Contact List Chart
+						<div class="contactsDiv">
+							<div class="list-group"></div>
+						</div>
+						<svg class="graphSvg"></svg>
 					</div>
 				</div>
 			</div>
@@ -73,7 +77,7 @@
 		});
 
 		threadLength();
-		
+		contactsList();
 		$(window).load(function(){
 			$('#tab a[href="#tab1"]').tab('show');
 		});

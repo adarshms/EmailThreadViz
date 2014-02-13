@@ -1,19 +1,6 @@
-.chart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: end;
-
-.axis {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.x.axis path {
-  display: none;
+.threadlength {
+  height: 500px;
+  overflow-x: scroll;
+  margin-top: 20px;
+  fill: #FAFAFA;
 }

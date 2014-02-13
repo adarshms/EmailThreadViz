@@ -1,6 +1,6 @@
 function threadLength() {
 	var width = document.getElementById('chart-area').offsetWidth - 10,
-		barHeight = 10;
+		barHeight = 8;
 
 
 	var x = d3.scale.linear()
@@ -26,16 +26,16 @@ function threadLength() {
 	bar.append("rect")
 		.attr("width", function(d) { return x(d.value); })
 		.attr("height", barHeight - 1)
-		.style("fill", function(d) {return d.color<4?"#20e2e3":d.color<7?"#30a2a9":d.color<10?"#1d6a87":d.color<20?"#0f426a":"#01223b";});
+		.style("fill", function(d) {return d.color<4?"#00C1C2":d.color<7?"#1D8290":d.color<10?"#1C517E":"#023255";});
 
 	svg.append("g")
 		.call(d3.svg.axis()
        	.orient("bottom"));
-	bar.append("text")
+	/*bar.append("text")
 		.attr("x", function(d) { return x(d.value) - 3; })
 		.attr("y", barHeight / 2)
 		.attr("dy", ".35em")
-		.text(function(d) { return d.value; });
+		.text(function(d) { return d.value; });*/
 
 	});
 

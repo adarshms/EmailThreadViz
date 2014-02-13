@@ -103,8 +103,10 @@
     color : black;
     cursor:default;
     background-color: #FFFFEE;
-    border: 2px solid;
+    border: 0px;
+	border-radius: 8px;
     padding: 4px;
     shape-rendering: crispEdges;
     pointer-events: none;
+	font-size: 12px;
 }

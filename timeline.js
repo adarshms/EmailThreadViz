@@ -11,7 +11,7 @@ function timeline(domElement) {
     // chart geometry
     var margin = {top: 20, right: 20, bottom: 0, left: 0},
         outerWidth = document.getElementById('chart-area').offsetWidth - 10,
-		outerHeight = 570,
+		outerHeight = 560,
         width = outerWidth - margin.left - margin.right,
         height = outerHeight - margin.top - margin.bottom;
 
@@ -48,7 +48,7 @@ function timeline(domElement) {
         .attr("class", "tooltip")
         .style("visibility", "visible")
 		.style("z-index", "10")
-		.style("opacity","1.0");
+		.style("opacity","0.8");
 
     //--------------------------------------------------------------------------
     //
@@ -112,10 +112,10 @@ function timeline(domElement) {
                     for (i = 0, track = 0; i < tracks.length; i++, track++) {
                         if (item.end < tracks[i]) { break; }
                     }
-					if(track <= 50) {
+					//if(track <= 50) {
 						item.track = track;
 						tracks[track] = item.start;
-					}
+					//}
                 });
             }
             function sortForward() {
@@ -220,17 +220,25 @@ function timeline(domElement) {
             .attr("y", function (d) { return band.yScale(d.track); })
             .attr("height", band.itemHeight)
             .attr("class", function (d) { return d.instant ? "part instant" : "interval";})
-			.attr("fill", function(d) { return (d.people<5? "#95B9C7":"#486380")});
+			.attr("people", function (d) { return d.people; })
+			.attr("fill", function(d) { 
+				var hexColor;
+				if(d.color <= 3)
+					hexColor = "#00C1C2";
+				else if(d.color <= 6)
+					hexColor = "#1D8290";
+				else if(d.color <= 9)
+					hexColor = "#1C517E";
+				else
+					hexColor = "#023255";
+				return hexColor;
+				//return (d.color<5? "#95B9C7":"#486380")
+			});
 
         var intervals = d3.select("#band" + bandNum).selectAll(".interval");
         intervals.append("rect")
             .attr("width", "100%")
             .attr("height", "70%");
-        /*intervals.append("text")
-            .attr("class", "intervalLabel")
-            .attr("x", 1)
-            .attr("y", 10)
-            .text(function (d) { return d.label; });*/
 
         var instants = d3.select("#band" + bandNum).selectAll(".instant");
         instants.append("circle")
@@ -354,7 +362,9 @@ function timeline(domElement) {
         function getHtml(element, d) {
             var html;
             if (element.attr("class") == "interval") {
-                html = d.subject + "<br>" + toYear(d.start) + " - " + toYear(d.end) ;
+                html = "<b>Interval : </b>" + toYear(d.start) + " - " + toYear(d.end) + "<br>";
+				html += "<b>Subject : </b>" + d.subject + "<br>";
+				html += "<b>People : </b>" + d.people;
             } else {
                 html = d.subject + "<br>" + toYear(d.start);
             }

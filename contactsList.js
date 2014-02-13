@@ -3,10 +3,10 @@ function contactsList() {
 	
 	var emailData = [];
 
-	var colors = ["#20e2e4", "#00c1c2", "#30a2a9", "#1d8290", "#1d6a87", "#1d6a87", "#1c517e", "#0f426a", "#023255", "#01223b"];
+	var colors = ["#00C1C2", "#1D8290", "#1C517E", "#023255"];
 
-	var margin = {top: 40, right: 10, bottom: 20, left: 10},
-	    width = 760 - margin.left - margin.right,
+	var margin = {top: 0, right: 10, bottom: 0, left: 10},
+	    width = document.getElementById('chart-area').offsetWidth - 250,
 	    height = 500 - margin.top - margin.bottom;
 
 	var contactsData = [];
@@ -33,8 +33,8 @@ function contactsList() {
 		.attr("transform", "translate("+margin.left+","+margin.top+")");
 		
 	var tooltipDiv = d3.select("body").append("div")
-		.attr("class", "tooltip")
-		.style("opacity", 0);
+		.attr("class", "contooltip")
+		.style("opacity", 0.8);
 	 
 	function dataLoaded() {
 		contacts.attr("height", contactsData.length*25);
@@ -104,13 +104,11 @@ function contactsList() {
 		    .attr("width", x.rangeBand())
 		    .attr("height", function(d) {return 10*d.y;})
 		    .style("fill", function(d) {
-		    	if (d.numPeople >20)
-		    		return colors[4];
-		    	else if (d.numPeople >9)
+		    	if (d.numPeople >= 10)
 		    		return colors[3];
-		    	else if (d.numPeople > 6)
+		    	else if (d.numPeople >= 7)
 		    		return colors[2];
-		    	else if (d.numPeople > 3)
+		    	else if (d.numPeople >= 4)
 		    		return colors[1];
 		    	else
 		    		return colors[0];
@@ -120,8 +118,8 @@ function contactsList() {
 		    		.duration(200)
 		    		.style("opacity", .9);
 		    	tooltipDiv.html(d.y + " messages<br>between<br>"+d.numPeople+ " people")
-		    		.style("left", (d3.event.pageX-200-10-20)+"px")
-		    		.style("top", (d3.event.pageY-28-20)+"px");
+		    		.style("left", (d3.event.pageX + 10)+"px")
+		    		.style("top", (d3.event.pageY + 10)+"px");
 		    })
 		    .on("mouseout", function(d) {
 		    	tooltipDiv.transition()
@@ -130,7 +128,7 @@ function contactsList() {
 		    });
 		    	
 		graph.append("g")
-		    .attr("class", "x axis")
+		    .attr("class", "conaxis")
 		    .attr("transform", "translate(0," + height/2 + ")")
 		    .call(xAxis);
 	}

@@ -1,31 +1,24 @@
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: auto;
-  position: relative;
-  width: 960px;
-}
-
 text {
   font: 10px sans-serif;
 }
 
 .contactsDiv {
-	margin-top: 50px;
+	margin-top: 20px;
 	width: 200px;
-	height: 440px;
+	height: 450px;
 	float: left;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
 
-.axis path,
-.axis line {
+.conaxis path,
+.conaxis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
 }
 
-.axis text {
+.conaxis text {
 	display: none;
 }
 
@@ -37,14 +30,14 @@ text {
 	fill: steelblue;
 }
 
-div.tooltip {
+div.contooltip {
 	position: absolute;
 	text-align: center;
-	width: 80px;
-	height: 50px;
+	width: auto;
+	height: auto;
 	padding: 2px;
 	font-size: 12px;
-	background: lightsteelblue;
+    background-color: #FFFFEE;
 	border: 0px;
 	border-radius: 8px;
 	pointer-events: none;
