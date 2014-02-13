@@ -10,10 +10,12 @@ text {
 }
 
 .contactsDiv {
-	width: 100px;
+	margin-top: 50px;
+	width: 200px;
 	height: 440px;
 	float: left;
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 .axis path,
@@ -27,6 +29,23 @@ text {
 	display: none;
 }
 
+.graphSvg {
+	margin-top: 50px;
+}
+
 .graphSvg rect{
 	fill: steelblue;
+}
+
+div.tooltip {
+	position: absolute;
+	text-align: center;
+	width: 80px;
+	height: 50px;
+	padding: 2px;
+	font-size: 12px;
+	background: lightsteelblue;
+	border: 0px;
+	border-radius: 8px;
+	pointer-events: none;
 }
