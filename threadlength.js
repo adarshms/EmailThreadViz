@@ -26,7 +26,7 @@ function threadLength() {
 	bar.append("rect")
 		.attr("width", function(d) { return x(d.value); })
 		.attr("height", barHeight - 1)
-		.style("fill", function(d) {return d.color<4?"#CCFFFF":d.color<7?"#66FFFF":d.color<10?"#0099FF":d.color<20?"#0033CC":"#000066";});
+		.style("fill", function(d) {return d.color<4?"#20e2e3":d.color<7?"#30a2a9":d.color<10?"#1d6a87":d.color<20?"#0f426a":"#01223b";});
 
 	svg.append("g")
 		.call(d3.svg.axis()
