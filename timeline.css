@@ -59,7 +59,7 @@
 
 .interval {
     /*fill: #AAFFFF;*/
-	fill:steelblue;
+	/*fill:steelblue;*/
     stroke-width: 6;
     cursor : default;
     pointer-events: true;
@@ -91,7 +91,7 @@
 
 .svg {
     border-style: solid;
-    border-width: 1px;
+    border-width: 0px;
     border-color: black;
     background-color: #FFFFFF;
 }
@@ -103,7 +103,7 @@
     color : black;
     cursor:default;
     background-color: #FFFFEE;
-    border: 1px solid;
+    border: 2px solid;
     padding: 4px;
     shape-rendering: crispEdges;
     pointer-events: none;

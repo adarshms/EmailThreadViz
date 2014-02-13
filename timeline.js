@@ -9,9 +9,9 @@ function timeline(domElement) {
     //
 
     // chart geometry
-    var margin = {top: 20, right: 20, bottom: 20, left: 20},
+    var margin = {top: 20, right: 20, bottom: 0, left: 0},
         outerWidth = document.getElementById('chart-area').offsetWidth - 10,
-		outerHeight = 525,
+		outerHeight = 570,
         width = outerWidth - margin.left - margin.right,
         height = outerHeight - margin.top - margin.bottom;
 
@@ -46,7 +46,9 @@ function timeline(domElement) {
     var tooltip = d3.select("body")
         .append("div")
         .attr("class", "tooltip")
-        .style("visibility", "visible");
+        .style("visibility", "visible")
+		.style("z-index", "10")
+		.style("opacity","1.0");
 
     //--------------------------------------------------------------------------
     //
@@ -110,8 +112,10 @@ function timeline(domElement) {
                     for (i = 0, track = 0; i < tracks.length; i++, track++) {
                         if (item.end < tracks[i]) { break; }
                     }
-                    item.track = track;
-                    tracks[track] = item.start;
+					if(track <= 50) {
+						item.track = track;
+						tracks[track] = item.start;
+					}
                 });
             }
             function sortForward() {
@@ -120,8 +124,10 @@ function timeline(domElement) {
                     for (i = 0, track = 0; i < tracks.length; i++, track++) {
                         if (item.start > tracks[i]) { break; }
                     }
-                    item.track = track;
-                    tracks[track] = item.end;
+					if(track <= 50) {
+						item.track = track;
+						tracks[track] = item.end;
+					}
                 });
             }
 
@@ -213,12 +219,13 @@ function timeline(domElement) {
             .enter().append("svg")
             .attr("y", function (d) { return band.yScale(d.track); })
             .attr("height", band.itemHeight)
-            .attr("class", function (d) { return d.instant ? "part instant" : "part interval";});
+            .attr("class", function (d) { return d.instant ? "part instant" : "interval";})
+			.attr("fill", function(d) { return (d.people<5? "#95B9C7":"#486380")});
 
         var intervals = d3.select("#band" + bandNum).selectAll(".interval");
         intervals.append("rect")
             .attr("width", "100%")
-            .attr("height", "30%");
+            .attr("height", "70%");
         /*intervals.append("text")
             .attr("class", "intervalLabel")
             .attr("x", 1)
@@ -347,22 +354,20 @@ function timeline(domElement) {
         function getHtml(element, d) {
             var html;
             if (element.attr("class") == "interval") {
-                html = d.label + "<br>" + toYear(d.start) + " - " + toYear(d.end) ;
+                html = d.subject + "<br>" + toYear(d.start) + " - " + toYear(d.end) ;
             } else {
-                html = d.label + "<br>" + toYear(d.start);
+                html = d.subject + "<br>" + toYear(d.start);
             }
             return html;
         }
 
         function showTooltip (d) {
-
             var x = event.pageX < band.x + band.w / 2
                     ? event.pageX + 10
                     : event.pageX - 110,
                 y = event.pageY < band.y + band.h / 2
                     ? event.pageY + 30
                     : event.pageY - 30;
-
             tooltip
                 .html(getHtml(d3.select(this), d))
                 .style("top", y + "px")
@@ -458,7 +463,7 @@ function timeline(domElement) {
     }
 
     function toYear(date, bcString) {
-		var readableDate = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
+		var readableDate = (date.getMonth() + 1) + "/" + date.getDate() + "/" + (date.getFullYear()).toString().substring(2,4);
 		return readableDate.toString();
     }
 	

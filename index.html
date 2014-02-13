@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="keywords" lang="de" content="Zeitleiste, Zeitlinie, Zeitkarte, Geschichte, Chronologie">
@@ -10,6 +9,7 @@
     <script src="d3js/d3.v3.min.js"></script>
 	<script src="jquery/jquery.js"></script>
     <script src="timeline.js"></script>
+	<script src="threadlength.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 	
 	<link href="timeline.css" rel="stylesheet" type="text/css" />
@@ -34,33 +34,34 @@
 					</li>
 				</ul>
 				<div class="tab-content">
-						<div class="tab-pane active" id="tab1">
-							<div id="timeline" width="100%" height="100%"></div>
-						</div>
-						<div class="tab-pane" id="tab2">
-							Thread Count Chart
-						</div>
-						<div class="tab-pane" id="tab3">
-							Contact List Chart
+					<div class="tab-pane active" id="tab1">
+						<div id="timeline"></div>
+					</div>
+					<div class="tab-pane" id="tab2">
+						<div class="threadlength">
+							<svg class="chart"></svg>
 						</div>
 					</div>
+					<div class="tab-pane" id="tab3">
+						Contact List Chart
+					</div>
+				</div>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
 	</div>
 
 	<script>
-		var domElement = "#timeline";
-		//var sourceFile = "philosophers.csv";
-		var sourceFile = "timeline.csv";
+		var timelineElement = "#timeline";
+		var timeLineSource = "timeline.csv";
 
-		// Read in the data and construct the timeline
-		d3.csv(sourceFile, function(dataset) {
+		// Construct timeline
+		d3.csv(timeLineSource, function(dataset) {
 
-			timeline(domElement)
+			timeline(timelineElement)
 				.data(dataset)
-				.band("mainBand", 0.82)
-				.band("naviBand", 0.08)
+				.band("mainBand", 0.80)
+				.band("naviBand", 0.10)
 				.xAxis("mainBand")
 				.tooltips("mainBand")
 				.xAxis("naviBand")
@@ -70,6 +71,9 @@
 				.redraw();
 
 		});
+
+		threadLength();
+		
 		$(window).load(function(){
 			$('#tab a[href="#tab1"]').tab('show');
 		});
