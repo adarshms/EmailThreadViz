@@ -1,0 +1,32 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: auto;
+  position: relative;
+  width: 960px;
+}
+
+text {
+  font: 10px sans-serif;
+}
+
+.contactsDiv {
+	width: 100px;
+	height: 440px;
+	float: left;
+	overflow: scroll;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+	display: none;
+}
+
+.graphSvg rect{
+	fill: steelblue;
+}
